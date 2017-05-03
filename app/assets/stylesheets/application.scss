@@ -1,0 +1,20 @@
+@import "bootstrap";
+@import "home";
+
+
+.mtop-20{
+	margin-top: 20px;
+}
+
+.selected-items .item-to-select, .item-list .item-to-remove{
+	display: none;
+}
+.cursor-pointer{
+	cursor: pointer;
+}
+.mbtm-20{
+	margin-bottom: 20px;
+}
+.mtop-40{
+	margin-top: 40px;
+}

@@ -1,0 +1,33 @@
+<%= form_for(dine_table) do |f| %>
+  <% if dine_table.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(dine_table.errors.count, "error") %> prohibited this dine_table from being saved:</h2>
+
+      <ul>
+      <% dine_table.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :table_name %>
+    <%= f.text_field :table_number, class: "form-control" %>
+  </div>
+
+  <div class="field mtop-20">
+    <%= f.label :seating_capacity %>
+    <%= f.number_field :capacity, class: "form-control" %>
+  </div>
+
+  <div class="form-group mtop-20">
+    <%= f.label :status %>
+    <%= f.select :status, @states, {}, {class: "form-control"} %>
+  </div>
+
+  <div class="actions mtop-20">
+    <%= f.submit class: "btn btn-sm btn-success" %>
+    <hr>
+  </div>
+<% end %>

@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<div>
+  <strong class="btn btn-info" id="table-number" data-table="<%= @dine_table.id%>">Table number: <%= @dine_table.table_number%></strong>
+  <strong class="btn btn-info" id="original-capacity" data-capacity="<%= @dine_table.capacity%>">Capacity: <%= @dine_table.capacity%></strong>
+</div>
+
+<div class="row">
+  <div class="col-sm-8 mtop-20">
+    <%= form_tag(dine_table_path(@dine_table), method: :get) do %>
+    <span>Dine Type:</span>
+    <%= select_tag 'category', options_for_select(['Food','Drinks','All'], params['category'] || "All"), class: "form-control mbtm-20", onchange: "this.form.submit()" %>
+
+    <span>Number of persons:</span>
+    <%= select_tag 'members', options_for_select((0..@dine_table.capacity).to_a,  params['members'] || 0), class: "form-control" %>
+    <%end%>
+  </div>
+  <div class="col-sm-4 mtop-20">
+    <%if params['category'] == "Drinks"%>
+      <%= image_tag 'drinks.ico', size: '40x40' %>
+    <%elsif params['category'] == "Food" %>
+      <%= image_tag 'food.png', size: '40x40' %>
+    <%else%>
+      <%= image_tag 'drinks.ico', size: '40x40' %>
+      <%= image_tag 'food.png', size: '40x40' %>
+    <%end%>
+    <div class="mtop-40">
+      <span>Assign Waiter:</span>
+      <%= select_tag 'waiter', options_for_select(@waiters), class: "form-control" %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <label ></label>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Image</th>
+          <th>Add Item</th>
+        </tr>
+      </thead>
+
+      <tbody class="item-list">
+        <% @menu_items.each do |menu_item| %>
+          <tr class="item-<%=menu_item.id%>">
+            <td><%= menu_item.name %></td>
+            <td data-i="<%=menu_item.id%>"><%= image_tag menu_item.item_image.url(:thumb), class: "rounded"%></td>
+            <td class="">
+              <span class="btn btn-sm btn-success item-to-select" onclick="addItem('<%= menu_item.id %>')"> Add to List >> </span>
+              <span class="btn btn-sm btn-danger item-to-remove" onclick="removeItem('<%= menu_item.id %>')"> << Remove Item  </span>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-sm-6 mtop-20">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Image</th>
+          <th>Added Items</th>
+        </tr>
+      </thead>
+
+      <tbody class="selected-items">
+
+      </tbody>
+    </table>
+  </div>
+  <div class="" style="float:right">
+    <span class="btn btn-sm btn-success cursor-pointer" onclick="SendToKitchen()">Send To kitchen</span>
+  </div>
+</div>

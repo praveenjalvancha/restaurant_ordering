@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Dine Tables | <%= link_to 'New Dine Table', new_dine_table_path, class: 'btn btn-large btn-primary' %> </h1>
+<br>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="row">Table number</th>
+      <th scope="row">Status</th>
+      <th scope="row">Capacity</th>
+      <th scope="row">Waiter Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @dine_tables.each do |dine_table| %>
+      <tr>
+        <td><%= dine_table.table_number %></td>
+        <td><%= dine_table.status %></td>
+        <td><%= dine_table.capacity %></td>
+        <%if dine_table.status == "Not Available"%>
+          <% link = dine_table.table_current_order ? "/orders/#{dine_table.table_current_order.order_id.to_s}" : "#" %>
+          <td><%= link_to 'Booked: SHOW ORDER', link, class: 'btn btn-sm btn-info' %></td>
+        <%else%>
+          <td><%= link_to 'Book Dine', dine_table, class: 'btn btn-sm btn-success' %></td>
+        <%end%>
+        <td><%= link_to 'Edit', edit_dine_table_path(dine_table), class: 'btn btn-sm btn-warning' %></td>
+        <td><%#= link_to 'Destroy', dine_table, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

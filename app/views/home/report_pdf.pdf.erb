@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+<table class="table table-responsive">
+  <thead>
+    <tr>
+      <th scope="row">Table #</th>
+      <th scope="row">Orderd on</th>
+      <th scope="row">Price</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.dine_table.table_number %></td>
+        <td ><%= order.created_at.strftime("%D %T") %></td>
+        <td ><%= order.total_price || 0 %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<hr>
+<div>
+  <div><strong>Total Orders:</strong>&nbsp;&nbsp;&nbsp;<%= @orders.count%></div>
+  <div><strong>Total Counter:</strong>&nbsp;&nbsp;&nbsp;<%=@total_day_price%></div>
+</div>

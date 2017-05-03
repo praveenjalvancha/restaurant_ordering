@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Menu Items | 
+<%= link_to 'New Menu Item', new_menu_item_path, class: 'btn btn-large btn-primary' %></h1>
+
+<br>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Image</th>
+      <th>Category</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @menu_items.each do |menu_item| %>
+      <tr>
+        <td><%= menu_item.name %></td>
+        <td><%= image_tag menu_item.item_image.url(:thumb), class: "rounded"%></td>
+        <td><%= menu_item.category %></td>
+        <td><%= link_to 'Show', menu_item, class: 'btn btn-sm btn-success' %></td>
+        <td><%= link_to 'Edit', edit_menu_item_path(menu_item), class: 'btn btn-sm btn-info' %></td>
+        <td><%= link_to 'Destroy', menu_item, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

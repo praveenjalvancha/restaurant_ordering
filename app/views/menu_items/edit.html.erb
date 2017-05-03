@@ -1,0 +1,10 @@
+<h1>Editing Menu</h1>
+<div class="row">
+	<div class="col-sm-8">
+		<%= render 'form', menu_item: @menu_item %>
+		<div class="mtop-20 pull-right">
+			<%= link_to 'Show', @menu_item, class: "btn btn-sm btn-info" %>
+			<%= link_to 'Back', menu_items_path, class: "btn btn-sm btn-warning" %>
+		</div>
+	</div>
+</div>

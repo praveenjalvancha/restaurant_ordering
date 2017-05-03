@@ -1,0 +1,63 @@
+<div class="row">
+	<div class="col-lg-5">
+		<div class="card" style="width: 20rem;">
+		  <div class="card-block">
+		    <strong class="card-title">Report By Waiter:</strong>
+				<%= form_tag( home_report_by_category_path , method: :get) do %>
+					<div class="mtop-20">
+						<%= label_tag :date %>
+						<%= date_field_tag :date, params[:date], class: "form-control" %>
+					</div>
+					<div>
+						<%= label_tag :category %>
+						<%= select_tag :category, options_for_select(['Food','Drinks','All'], params['category'] || "All"), class: "form-control mbtm-20" %>
+					</div>
+					<%= submit_tag "Get Report", class: "btn btn-large btn-primary mtop-20" %>
+				<% end %>
+		  </div>
+		</div>
+
+		<div class="card mtop-20" style="width: 20rem;">
+		  <div class="card-block">
+		    <h6 class="card-title">Report By Dine Type (Food or Dinks):</h6>
+		    <a href="#" class="btn btn-primary">Go somewhere</a>
+		  </div>
+		</div>
+	</div>
+
+	<div class="col-lg-7">
+		<div class="card" style="width: 20rem;">
+		  <div class="card-block">
+		  	<strong>Total Price: <i><%=@total_day_price%></i></strong>
+		  	<strong class="float-right">Category: <i><%= params['category']%></i></strong>
+					<table class="table table-responsive">
+					  <thead>
+					    <tr>
+					      <th scope="row">Table #</th>
+					      <th scope="row">Orderd on</th>
+					      <th scope="row">Price</th>
+					      <th colspan="3"></th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <% @orders.each do |order| %>
+					      <tr>
+					        <td><%= order.dine_table.table_number %></td>
+					        <td ><%= order.created_at.strftime("%D %T") %></td>
+					        <td ><%= order.total_price || 0 %></td>
+					      </tr>
+					    <% end %>
+					  </tbody>
+					</table>
+					<%= form_tag(home_report_pdf_path , method: :get) do %>
+						<%= hidden_field_tag :date, params[:date] %>
+						<%= hidden_field_tag :category, params['category'] %>
+						<%if params['category'].present?%>
+							<%= submit_tag "Generate PDF", class: "btn btn-large btn-primary mtop-20" %>
+						<%end%>
+					<% end %>					
+		  </div>
+			<br>
+		</div>
+	</div>
+</div>

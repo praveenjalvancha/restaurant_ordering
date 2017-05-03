@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @menu_item.name %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @menu_item.category %>
+</p>
+
+<%= image_tag @menu_item.item_image.url(:medium), class: "img-thumbnail" %>
+
+
+<%= link_to 'Edit', edit_menu_item_path(@menu_item), class: "btn btn-sm btn-info" %>
+<%= link_to 'Back', menu_items_path, class: "btn btn-sm btn-warning" %>

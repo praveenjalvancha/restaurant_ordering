@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  order_state: MyString
+  dine_table: one
+
+two:
+  order_state: MyString
+  dine_table: two
